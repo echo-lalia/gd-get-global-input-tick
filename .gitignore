@@ -7,10 +7,6 @@
 *.pyc
 
 # compiled binaries
-demo/addons/gd-global-input/linux/*
-demo/addons/gd-global-input/macos/*
-demo/addons/gd-global-input/windows/*
-
-!demo/addons/gd-global-input/linux/.gitkeep
-!demo/addons/gd-global-input/macos/.gitkeep
-!demo/addons/gd-global-input/windows/.gitkeep
+addons/gd-global-input-tick/linux/*
+addons/gd-global-input-tick/macos/*
+addons/gd-global-input-tick/windows/*

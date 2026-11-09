@@ -3,7 +3,6 @@
 #include <godot_cpp/classes/input_map.hpp>
 #include <godot_cpp/classes/input_event_key.hpp>
 #include <godot_cpp/classes/input_event_mouse_button.hpp>
-// #include <godot_cpp/variant/array.hpp>
 
 using namespace godot;
 
