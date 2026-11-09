@@ -8,22 +8,22 @@
 
 using namespace godot;
 
-static GlobalInput *global_input_ptr = nullptr;
+static LastInputTick *last_input_tick_ptr = nullptr;
 
 void initialize(ModuleInitializationLevel p_level) {
 	if (p_level != MODULE_INITIALIZATION_LEVEL_SCENE)
 		return;
-	ClassDB::register_class<GlobalInput>();
-	global_input_ptr = memnew(GlobalInput);
-	Engine::get_singleton()->register_singleton("GlobalInput", global_input_ptr);
+	ClassDB::register_class<LastInputTick>();
+	last_input_tick_ptr = memnew(LastInputTick);
+	Engine::get_singleton()->register_singleton("LastInputTick", last_input_tick_ptr);
 }
 
 void uninitialize(ModuleInitializationLevel p_level) {
 	if (p_level != MODULE_INITIALIZATION_LEVEL_SCENE)
 		return;
-	Engine::get_singleton()->unregister_singleton("GlobalInput");
-	memdelete(global_input_ptr);
-	global_input_ptr = nullptr;
+	Engine::get_singleton()->unregister_singleton("LastInputTick");
+	memdelete(last_input_tick_ptr);
+	last_input_tick_ptr = nullptr;
 }
 
 extern "C" {
