@@ -43,15 +43,14 @@ jobs:
       - name: Prepare Plugin Directory
         shell: bash
         run: |
-          mkdir -p demo/addons/gd-global-input/${{ matrix.platform }}
-          cp -r bin/* demo/addons/gd-global-input/${{ matrix.platform }}/ || true
-          cp LICENSE demo/addons/gd-global-input/LICENSE.txt
+          mkdir -p addons/gd-global-input-tick/${{ matrix.platform }}
+          cp -r bin/* addons/gd-global-input-tick/${{ matrix.platform }}/ || true
 
       - name: Upload build artifacts
         uses: actions/upload-artifact@v4
         with:
-          name: gd-global-input-${{ matrix.platform }}-${{ matrix.arch }}
-          path: demo/addons/gd-global-input/
+          name: gd-global-input-tick${{ matrix.platform }}-${{ matrix.arch }}
+          path: addons/gd-global-input-tick/
 
   package:
     needs: build
@@ -64,23 +63,23 @@ jobs:
 
       - name: Merge into single addon folder
         run: |
-          mkdir -p release/addons/gd-global-input
-          for dir in artifacts/gd-global-input-*/; do
-            rsync -a "$dir"/ release/addons/gd-global-input/
+          mkdir -p release/addons/gd-global-input-tick
+          for dir in artifacts/gd-global-input-tick-*/; do
+            rsync -a "$dir"/ release/addons/gd-global-input-tick/
           done
-          find release/addons/gd-global-input -name "*.exp" -type f -delete
-          find release/addons/gd-global-input -name "*.lib" -type f -delete
+          find release/addons/gd-global-input-tick -name "*.exp" -type f -delete
+          find release/addons/gd-global-input-tick -name "*.lib" -type f -delete
 
       - name: Create release ZIP
         run: |
-          ZIP_NAME="gd-global-input-${{ github.ref_name }}.zip"
+          ZIP_NAME="gd-global-input-tick-${{ github.ref_name }}.zip"
           cd release && zip -r ../$ZIP_NAME addons/
           echo "ZIP_NAME=$ZIP_NAME" >> $GITHUB_ENV
 
       - name: Upload release ZIP
         uses: actions/upload-artifact@v4
         with:
-          name: gd-global-input-release
+          name: gd-global-input-tick-release
           path: ${{ env.ZIP_NAME }}
 
       - name: Publish to GitHub Release
