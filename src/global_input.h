@@ -36,6 +36,8 @@ public:
     GlobalInput();
     ~GlobalInput();
 
+    int get_last_input_tick();
+
     bool is_global_key_pressed(int p_keycode);
     bool is_global_key_just_pressed(int p_keycode);
     bool is_global_key_just_released(int p_keycode);

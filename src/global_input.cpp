@@ -39,6 +39,8 @@ void GlobalInput::_bind_methods() {
     ClassDB::bind_method(D_METHOD("is_caps_lock_active"), &GlobalInput::is_caps_lock_active);
     ClassDB::bind_method(D_METHOD("is_num_lock_active"), &GlobalInput::is_num_lock_active);
     ClassDB::bind_method(D_METHOD("is_scroll_lock_active"), &GlobalInput::is_scroll_lock_active);
+
+    ClassDB::bind_method(D_METHOD("get_last_input_tick"), &GlobalInput::get_last_input_tick);
 }
 
 // vk to godot keycode mapping
@@ -289,4 +291,13 @@ bool GlobalInput::is_global_input_just_released(const String &p_action) {
     for (int mb : evs.mouse_buttons)
         if (just_released_mouse_buttons.count(mb)) return true;
     return false;
+}
+
+int GlobalInput::get_last_input_tick() {
+    LASTINPUTINFO input_info;
+    input_info.cbSize = sizeof(LASTINPUTINFO);
+    if (GetLastInputInfo(&input_info)) {
+        return input_info.dwTime;
+    }
+    return -1;
 }
